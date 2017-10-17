@@ -13,8 +13,7 @@ class RingBuffer
   # O(1)
   def [](index)
 					raise "index out of bounds" if index >= @length
-					idx = check_index(index)
-					@store[idx]
+					@store[check_index(index)]
   end
 
   # O(1)

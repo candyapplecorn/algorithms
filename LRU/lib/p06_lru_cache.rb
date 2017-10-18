@@ -16,11 +16,16 @@ class LRUCache
   end
 
   def get(key)
-    val = @map.get(key)
+    val = @map.getNode(key)
     if val
-      #update_node!()
+			# update the linked list
+			# return the value
+			update_node!(val)
     else
-      val = @map.set(key, @prc.call(key))
+			# insert into linked list
+			# insert into map
+			val = calc!(key)
+			eject! if @max < count
     end
     val.val
   end
@@ -33,13 +38,20 @@ class LRUCache
 
   def calc!(key)
     # suggested helper method; insert an (un-cached) key
-
+    val = @map.set(key, @prc.call(key))
+		@store.append(key, val)
+		val
   end
 
   def update_node!(node)
     # suggested helper method; move a node to the end of the list
+    @store.remove(node.key)
+		@store.append(node.key, node.val)
   end
 
   def eject!
+		removeThis = @store.first.val.key
+		@map.delete(removeThis)
+		@store.remove(removeThis)
   end
 end

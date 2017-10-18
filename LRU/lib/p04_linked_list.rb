@@ -55,6 +55,11 @@ class LinkedList
     ret ? ret.val : ret
   end
 
+  def getNode(key)
+    ret = self.find {|n| n.key == key }
+    ret
+  end
+
   def include?(key)
     self.any? {|n| n.key == key}
   end

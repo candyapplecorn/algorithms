@@ -29,6 +29,10 @@ class HashMap
     bucket(key).get(key)
   end
 
+  def getNode(key)
+    bucket(key).getNode(key)
+  end
+
   def delete(key)
     bucket(key).remove(key)
     @count -= 1
@@ -67,7 +71,7 @@ class HashMap
     each do |k, v|
       hm.set(k, v)
     end
-    
+
     @store = hm.store
   end
 

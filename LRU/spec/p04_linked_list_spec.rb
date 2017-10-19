@@ -1,6 +1,7 @@
 require 'byebug'
 require 'rspec'
-require 'p04_linked_list'
+#require 'p04_linked_list'
+require 'reversible_linked_list'
 
 describe LinkedList do
   let(:k_v_pairs) do

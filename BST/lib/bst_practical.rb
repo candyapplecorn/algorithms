@@ -1,20 +1,23 @@
 require_relative 'binary_search_tree'
 
-def kth_largest(tree_node, k, arr = [])
-					# Walk all the way to the rightmost (largest) node
-					ret = kth_largest(tree_node.right, k, arr) if tree_node.right
+def counter_gen(k = 0, step = 1)
+				Proc.new { k += step; k }
+end
 
-					# If the return value isn't nil, it's the kth largest
-					return ret unless ret.nil?
+def kth_largest(tree_node, k)
+				# On the very 1st call, transform k into a closure
+				k = counter_gen(k, -1) if k.kind_of? Fixnum
 
-					# Push a pointer to the current node; it's now in a series
-					# of the largest elements.
-					arr.unshift tree_node
+				# Walk all the way to the rightmost (largest) node
+				ret = kth_largest(tree_node.right, k) if tree_node.right
 
-					# If the array has k elements, we can return arr.first
-					# space complexity: n
-					return arr.first if arr.length == k
+				# If the return value isn't nil, it's the kth largest
+				return ret unless ret.nil?
 
-					# finally, check the left (smaller) subtrees
-					return kth_largest(tree_node.left, k, arr) if tree_node.left
+				# We've found the kth largest! Return it. The above statement
+				# will take care of returning it from the recursive stack
+				return tree_node if k.call == 0
+
+				# finally, check the left (smaller) subtrees
+				return kth_largest(tree_node.left, k) if tree_node.left
 end

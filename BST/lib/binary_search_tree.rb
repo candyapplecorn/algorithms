@@ -132,6 +132,6 @@ class BinarySearchTree
 	end
 
 	def no_children?(node)
-					node.left.nil? && node.right.nil?
+		node.left.nil? && node.right.nil?
 	end
 end

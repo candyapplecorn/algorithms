@@ -5,7 +5,7 @@ def trio_product(list)
 	list.each {|e| e >= 0 ? pos.insert(e) : neg.insert(e) }
 
 	pos = pos.items
-	neg = neg .items
+	neg = neg.items
 
 	posprod = product(pos)
 

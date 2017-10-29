@@ -1,24 +1,21 @@
 require_relative 'heap'
-require 'byebug'
-require 'byebug'
 
 class Array
   def heap_sort!
-    # 1. make a heap using the heap
-    h = BinaryMinHeap.new
-    each {|i| h.push(i)}
-    h.store.reverse!
-    debugger
+		maxPrc = Proc.new {|a, b| b <=> a}
 
-    last = h.count - 1
-    while last > 0
-      # make a max heap
-      # heapify up from left to right
-      #
-      # 2 treat it like a min heap
-      # make a barrier in the right hand side
-      # heapify down from the left, do not pass the barrier
-      # increment the barrier, heapify the next leftmost element
-    end
-  end
+		each_index {|i| BinaryMinHeap.heapify_up(self, length - 1 - i, length, &maxPrc) }
+
+		counter = 0
+		while counter < self.length / 2
+			#BinaryMinHeap.heapify_down(self, counter, length - 1 - counter)
+			counter += 1
+		end
+
+		(length).times do |i|
+			BinaryMinHeap.swap(self, 0, length - 1 - i)
+			BinaryMinHeap.heapify_down(self, 0, length - 1 - i, &maxPrc)
+
+		end
+	end
 end

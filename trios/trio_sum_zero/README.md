@@ -6,7 +6,7 @@ Write a function that takes a list and returns indices of trios of elements whic
 # input
 list = [1, 2, -3, 0, 2, -2]
 # output
-[[0, 1, 2], [3, 4, 5], [1, 3, 4]]
+[[1, 3, 5], [0, 2, 4], [0, 1, 2], [3, 4, 5]]
 
 ```
 
